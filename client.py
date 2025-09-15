@@ -34,4 +34,4 @@ response = requests.post(
 )
 
 print(response.json())
-# Ejemplo de salida: {'score': 0.12} → 12% probabilidad de fraude
+ 

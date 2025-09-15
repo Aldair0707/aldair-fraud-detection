@@ -17,10 +17,9 @@ app.add_middleware(
    allow_headers=["*"]
 )
 
-# Cargar modelo
+
 model = load(pathlib.Path("model/fraud-detection-v1.joblib"))
 
-# Definir entrada con todas las features relevantes
 class InputData(BaseModel):
     Per1: float
     Per2: float
