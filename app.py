@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = ["*"]
 
-app = FastAPI(title='Heart Disease Prediction')
+app = FastAPI(title="Fraud Detection API")
 
 app.add_middleware(
    CORSMiddleware,
@@ -17,29 +17,42 @@ app.add_middleware(
    allow_headers=["*"]
 )
 
-model = load(pathlib.Path('model/heart-disease-v1.joblib'))
+# Cargar modelo
+model = load(pathlib.Path("model/fraud-detection-v1.joblib"))
 
+# Definir entrada con todas las features relevantes
 class InputData(BaseModel):
-    age: int = 64
-    sex: int = 1
-    cp: int = 3
-    trestbps: int = 120
-    chol: int = 267
-    fbs: int = 0
-    restecg: int = 0
-    thalach: int = 99
-    exang: int = 1
-    oldpeak: float = 1.8
-    slope: int = 1
-    ca: int = 2
-    thal: int = 2
+    Per1: float
+    Per2: float
+    Per3: float
+    Per4: float
+    Per5: float
+    Per6: float
+    Per7: float
+    Per8: float
+    Per9: float
+    Dem1: float
+    Dem2: float
+    Dem3: float
+    Dem4: float
+    Dem5: float
+    Dem6: float
+    Dem7: float
+    Dem8: float
+    Dem9: float
+    Cred1: float
+    Cred2: float
+    Cred3: float
+    Cred4: float
+    Cred5: float
+    Cred6: float
+    Normalised_FNT: float
 
 class OutputData(BaseModel):
-    score: float = 0.80318881046519
+    score: float
 
-@app.post('/score', response_model=OutputData)
+@app.post("/score", response_model=OutputData)
 def score(data: InputData):
-    model_input = np.array([v for k, v in data.dict().items()]).reshape(1, -1)
-    result = model.predict_proba(model_input)[:, -1]
-
-    return {'score': result}
+    model_input = np.array([v for v in data.dict().values()]).reshape(1, -1)
+    result = model.predict_proba(model_input)[:, -1][0]  # probabilidad de fraude
+    return {"score": float(result)}
