@@ -21,31 +21,32 @@ app.add_middleware(
 model = load(pathlib.Path("model/fraud-detection-v1.joblib"))
 
 class InputData(BaseModel):
-    Per1: float
-    Per2: float
-    Per3: float
-    Per4: float
-    Per5: float
-    Per6: float
-    Per7: float
-    Per8: float
-    Per9: float
-    Dem1: float
-    Dem2: float
-    Dem3: float
-    Dem4: float
-    Dem5: float
-    Dem6: float
-    Dem7: float
-    Dem8: float
-    Dem9: float
-    Cred1: float
-    Cred2: float
-    Cred3: float
-    Cred4: float
-    Cred5: float
-    Cred6: float
-    Normalised_FNT: float
+    Per1: float = 1.07
+    Per2: float = 0.58
+    Per3: float = 0.48
+    Per4: float = 0.7667
+    Per5: float = 1.2333
+    Per6: float = 1.9933
+    Per7: float = 0.34
+    Per8: float = 1.01
+    Per9: float = 0.8633
+    Dem1: float = 0.46
+    Dem2: float = 0.6433
+    Dem3: float = 0.7367
+    Dem4: float = 0.7567
+    Dem5: float = 0.8133
+    Dem6: float = 0.6933
+    Dem7: float = 0.6667
+    Dem8: float = 0.68
+    Dem9: float = 0.7267
+    Cred1: float = 0.6067
+    Cred2: float = 1.01
+    Cred3: float = 0.9333
+    Cred4: float = 0.6033
+    Cred5: float = 0.6867
+    Cred6: float = 0.6733
+    Normalised_FNT: float = -245.75
+
 
 class OutputData(BaseModel):
     score: float
